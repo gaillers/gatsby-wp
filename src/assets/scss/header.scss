@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  .header-container {
+    max-width: 1440px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+}
+
+.nav {
+  align-self: center;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__link {
+    padding: 0 15px;
+
+    &:hover {
+      & a {
+        color: #000;
+      }
+    }
+    &:last-child {
+      padding-right: 0px;
+    }
+
+    & a {
+      font-size: 16px;
+      font-family: sans-serif;
+      color: #fff;
+      transition: all 0.6s ease-in;
+    }
+  }
+}
