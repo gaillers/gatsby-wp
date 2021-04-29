@@ -7,7 +7,7 @@ const SingleArticle = () => {
   return (
     <Layout>
       <div>
-         
+         singlearticle
       </div>
     </Layout>
   )

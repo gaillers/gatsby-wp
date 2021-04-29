@@ -11,7 +11,7 @@ const ArchiveArticle = () => {
   return (
     <Layout>
       <div>
-
+        archiveArticleTest
       </div>
     </Layout>
   )
