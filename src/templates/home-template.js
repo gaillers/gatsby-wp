@@ -2,27 +2,37 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 
-import "../assets/normalize.css";
-
+import "../assets/normalize.css"
 
 export const query = graphql`
-  query($id: ID!) {
+  query{
     wpgraphql {
-      page(id: $id) {
+      page(id: "cG9zdDo2") {
         title
         content
+        id
+        isFrontPage
+        contentType {
+          node {
+            name
+          }
+        }
       }
     }
   }
 `
-const HomeTemplate = ({ data }) => {
-  const page = data.wpgraphql.page
+const HomeTemplate = () => {
+//   const page = data.wpgraphql.page
+//   const pageInfo = {
+//    isFrontPage: page.isFrontPage,
+//    contentType: page.contentType,
+//    title: page.title,
+//  }
+
   return (
     <>
-      <h1 dangerouslySetInnerHTML={{ __html: page.title }} />
-      <div dangerouslySetInnerHTML={{ __html: page.content }} />
-      <Layout>
-      
+      <Layout pageInfo={pageInfo}>
+         
       </Layout>
     </>
   )

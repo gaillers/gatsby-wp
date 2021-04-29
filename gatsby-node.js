@@ -75,15 +75,6 @@ exports.createPages = async ({ actions, graphql }) => {
   // loop through WordPress pages and create a Gatsby page for each one
   pages.forEach(page => {
     switch (page.template.templateName.split(" ").join("")) {
-      case "Index":
-        actions.createPage({
-          path: page.uri,
-          component: require.resolve("./src/pages/index.js"),
-          context: {
-            id: page.id,
-          },
-        })
-        break
       case "HomePage":
         actions.createPage({
           path: page.uri,

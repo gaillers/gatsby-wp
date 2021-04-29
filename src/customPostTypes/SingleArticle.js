@@ -1,43 +1,45 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
-import Helmet from "react-helmet"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/Layout"
+import "../assets/scss/singleArticle.scss"
 
-const shortid = require("shortid")
-
-export const query = graphql`
-  query {
-    wpgraphql {
-      test_article_post(id: "cG9zdDo1NzY=") {
-        title
-        uri
-        content
-        date
-        id
-        featuredImage {
-          node {
-            mediaItemUrl
-          }
-        }
-        contentType {
-          node {
-            name
+export default function SingleArticle() {
+  const single = useStaticQuery(graphql`
+    query {
+      wpgraphql {
+        test_article_posts(first: 1000) {
+          nodes {
+            title
+            uri
+            content
+            date
+            id
+            featuredImage {
+              node {
+                mediaItemUrl
+              }
+            }
+            test_article_fields {
+              mainHeading
+              mainText
+            }
           }
         }
       }
     }
-  }
-`
+  `)
 
-const SingleArticle = () => {
+  const singleArticle = single.wpgraphql.test_article_posts.nodes
+
   return (
     <Layout>
       <div className="single-post">
-        
+        <div className="single-post__info">
+          <h1>{singleArticle.title}</h1>
+          <p></p>
+        </div>
       </div>
     </Layout>
   )
 }
-
-export default SingleArticle

@@ -2,14 +2,14 @@ import React from "react"
 
 import Header from "./Header"
 import Footer from "./Footer"
-import ArchiveArticle from "../templates/archives/ArchiveArticle"
 
-const Layout = () => {
+const Layout = ({ children }) => {
+
   return (
     <>
-      <Header />
-      <ArchiveArticle/>
-      <Footer />
+      <Header/>
+       { children }
+      <Footer/>
     </>
   )
 }
