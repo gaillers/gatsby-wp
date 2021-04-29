@@ -39,6 +39,26 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
 
+        test_article_posts(first: 1000) {
+          nodes {
+            id
+            link
+            uri
+            title(format: RENDERED)
+            databaseId
+            featuredImage {
+              node {
+                altText
+                mediaItemUrl
+              }
+            }
+            test_article_fields {
+              mainText
+              mainHeading
+            }
+          }
+        }
+  
       }
     }
   `)
@@ -103,13 +123,13 @@ exports.createPages = async ({ actions, graphql }) => {
   })
 
   //Single Pages for Custom Post Types
-  const contentSinglePage = result.data.wpgraphql.contentSinglePage.nodes
-  contentSinglePage.forEach(article => {
+  const contentSinglePage = result.data.wpgraphql.test_article_posts.nodes
+  contentSinglePage.forEach(testSingle => {
     actions.createPage({
-      path: article.uri,
+      path: testSingle.uri,
       component: require.resolve("./src/customPostTypes/SingleArticle.js"),
       context: {
-        id: article.id,
+        id: testSingle.id,
       },
     })
   })
