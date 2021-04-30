@@ -8,36 +8,31 @@ export default function SingleArticle() {
   const single = useStaticQuery(graphql`
     query {
       wpgraphql {
-        test_article_posts(first: 1000) {
-          nodes {
-            title
-            uri
-            content
-            date
-            id
-            featuredImage {
-              node {
-                mediaItemUrl
-              }
-            }
-            test_article_fields {
-              mainHeading
-              mainText
-            }
+        test_article_post(id: "cG9zdDo1NzY=") {
+          id
+          date
+          title(format: RENDERED)
+          test_article_fields {
+            mainHeading
+            mainText
           }
         }
       }
     }
   `)
 
-  const singleArticle = single.wpgraphql.test_article_posts.nodes
+  const singleArticle = single.wpgraphql.test_article_post
 
   return (
     <Layout>
-      <div className="single-post">
-        <div className="single-post__info">
+      <div className="single-posts">
+        <div className="container">
           <h1>{singleArticle.title}</h1>
-          <p></p>
+          <div className="single-post__info">
+            <h2>{singleArticle.test_article_fields.mainHeading}</h2>
+            <span>{singleArticle.date}</span>
+            <p>{singleArticle.test_article_fields.mainText}</p>
+          </div>
         </div>
       </div>
     </Layout>
