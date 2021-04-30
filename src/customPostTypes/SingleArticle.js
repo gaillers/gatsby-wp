@@ -1,28 +1,27 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import "../assets/scss/singleArticle.scss"
 
-export default function SingleArticle() {
-  const single = useStaticQuery(graphql`
-    query {
-      wpgraphql {
-        test_article_post(id: "cG9zdDo1NzY=") {
-          id
-          date
-          title(format: RENDERED)
-          test_article_fields {
-            mainHeading
-            mainText
-          }
+export const query = graphql`
+  query($id: ID!) {
+    wpgraphql {
+      test_article_post(id: $id) {
+        id
+        title(format: RENDERED)
+        date
+        test_article_fields {
+          mainText
+          mainHeading
         }
       }
     }
-  `)
+  }
+`
+export default function SingleArticle ({ data }) {
 
-  const singleArticle = single.wpgraphql.test_article_post
-
+  const singleArticle = data.wpgraphql.test_article_post
   return (
     <Layout>
       <div className="single-posts">
@@ -38,3 +37,4 @@ export default function SingleArticle() {
     </Layout>
   )
 }
+
