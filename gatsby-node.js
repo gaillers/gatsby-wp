@@ -8,26 +8,8 @@ exports.createPages = async ({ actions, graphql }) => {
             id
             uri
             template {
-              ... on wpgraphql_DefaultTemplate {
-                templateName
-              }
-              ... on wpgraphql_Template_ContactUs {
-                templateName
-              }
-              ... on wpgraphql_Template_HomePage {
-                templateName
-              }
-              ... on wpgraphql_Template_ReviewArchivePage {
-                templateName
-              }
+              templateName
             }
-          }
-        }
-
-        posts {
-          nodes {
-            id
-            uri
           }
         }
 
@@ -58,7 +40,6 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
-  
       }
     }
   `)
@@ -67,9 +48,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const pages = result.data.wpgraphql.pages.nodes
   const templates = []
   pages.forEach(page => {
-    templates.includes(page.template.templateName)
-      ? ""
-      : templates.push(page.template.templateName.split(" ").join(""))
+    templates.includes(page.template.templateName) ? "" : templates.push(page.template.templateName.split(" ").join(""))
   })
 
   // loop through WordPress pages and create a Gatsby page for each one
@@ -84,15 +63,6 @@ exports.createPages = async ({ actions, graphql }) => {
           },
         })
         break
-      case "PageTemplate":
-        actions.createPage({
-          path: page.uri,
-          component: require.resolve("./src/templates/page-template.js"),
-          context: {
-            id: page.id,
-          },
-        })
-        break
     }
   })
 
@@ -100,7 +70,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const contentTypes = result.data.wpgraphql.contentTypes.nodes
   contentTypes.forEach(type => {
     switch (type.name) {
-      case "ArchiveArticle":
+      case "article":
         actions.createPage({
           path: type.uri,
           component: require.resolve(

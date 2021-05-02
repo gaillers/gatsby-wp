@@ -1,11 +1,12 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React  from "react"
+import { Link, graphql } from "gatsby"
+import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
 
 export const query = graphql`
-  query{
+  query($id: ID!) {
     wpgraphql {
-      page(id: "cG9zdDo2") {
+      page(id: $id) {
         title
         content
         id
@@ -19,11 +20,14 @@ export const query = graphql`
     }
   }
 `
-const HomeTemplate = () => {
+const HomeTemplate = ({ data }) => {
+  const page = data.wpgraphql.page
+  const seo = page.seo
+
   return (
     <>
-      <Layout pageInfo={pageInfo}>
-         
+      <Layout>
+        <Link className="link-posts"> Posts </Link>
       </Layout>
     </>
   )
