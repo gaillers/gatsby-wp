@@ -118,7 +118,7 @@ exports.createPages = async ({ actions, graphql }) => {
   contentSinglePage.forEach(testSingle => {
     actions.createPage({
       path: testSingle.uri,
-      component: require.resolve("./src/customPostTypes/SingleArticle.js"),
+      component: require.resolve("./src/templates/singles/SingleArticle.js"),
       context: {
         id: testSingle.id,
       },

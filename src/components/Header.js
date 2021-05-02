@@ -1,8 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import "../assets/scss/header.scss"
-
 export default function Header(props) {
   const menu = useStaticQuery(graphql`
     query MyQuery {
@@ -59,7 +57,7 @@ export default function Header(props) {
                   key={item.id}
                   className={`nav__link ${title === item.label ? "link" : ""}`}
                 >
-                  <Link key={item.url} to={item.url}>
+                  <Link to={item.url}>
                     {item.label}
                   </Link>
 

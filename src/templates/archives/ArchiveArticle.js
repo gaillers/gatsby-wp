@@ -1,8 +1,6 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 
-import "../../assets/scss/archiveArticle.scss"
-
 export default function ArchiveArticle() {
   const testArticlePosts = useStaticQuery(graphql`
     query {
@@ -29,27 +27,28 @@ export default function ArchiveArticle() {
       }
     }
   `)
-
-  const items = testArticlePosts.wpgraphql.test_article_posts.nodes.map(
-    item => ({ ...item })
-  )
+  
+  const items = testArticlePosts.wpgraphql.test_article_posts.nodes
 
   return (
     <div className="posts-article">
       <div className="container">
-        {items.map(item => (
-          <div key={item.id} className="posts-item">
-            <Link key={item.uri} to={item.uri}>
-              <img src="https://wacky-tent.flywheelsites.com/wp-content/uploads/2021/03/Vavada-1.png" />
-            </Link>
-            <div className="posts-item__info">
-              <h3>{item.title}</h3>
-              <Link key={item.uri} to={item.uri}>
-                read more
+        {items.map(item => {
+          const imgPrew = item.featuredImage ? item.featuredImage.node.mediaItemUrl : ''
+          
+          return (
+            <div key={item.id} className="posts-item">
+              <Link to={item.uri}>
+                <img src={imgPrew}/>
               </Link>
+              <div className="posts-item__info">
+                <h3>{item.title}</h3>
+                <Link to={item.uri}>read more</Link>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+
+        })}
       </div>
     </div>
   )

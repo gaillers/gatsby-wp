@@ -1,8 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import "../assets/scss/footer.scss"
-
 const shortid = require("shortid")
 
 export default function Footer() {
