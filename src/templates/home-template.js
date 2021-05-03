@@ -2,6 +2,7 @@ import React  from "react"
 import { Link, graphql } from "gatsby"
 import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
+import Article from "../templates/archives/ArchiveArticle"
 
 export const query = graphql`
   query($id: ID!) {
@@ -27,7 +28,7 @@ const HomeTemplate = ({ data }) => {
   return (
     <>
       <Layout>
-        <Link className="link-posts"> Posts </Link>
+       <Article/>
       </Layout>
     </>
   )

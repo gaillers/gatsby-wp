@@ -46,10 +46,7 @@ export default function Header(props) {
     mediaItemUrl,
   } = menu.wpgraphql.themeGeneralSettings.option_header.headerLogo
 
-  const items = menu.wpgraphql.menu.menuItems.nodes.map(item => ({
-    ...item,
-    url: item.url.replace(url, ""),
-  }))
+  const items = menu.wpgraphql.menu.menuItems.nodes
 
   return (
     <header className="header" style={{ backgroundColor: "#1e90ff" }}>

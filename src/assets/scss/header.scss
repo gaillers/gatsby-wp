@@ -22,7 +22,7 @@
   &__link {
     position: relative;
     margin: 0 5px;
-    padding: 5px 15px;
+    padding: 15px 15px;
 
     &:hover {
       & a {
@@ -35,9 +35,11 @@
         width: auto;
         overflow: visible;
         clip: auto;
-        left: 15px;
-        top: 35px;
         position: absolute !important;
+        left: 15px;
+        top: 40px;
+        background: transparent;
+        min-width: 100%;
         & li {
           & a {
             color: #fff;
@@ -56,10 +58,6 @@
     }
 
     .dropdown {
-      left: 0;
-      top: auto;
-      background: transparent;
-      min-width: 100%;
       padding: 0;
       position: absolute;
       z-index: 99;

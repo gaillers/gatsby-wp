@@ -33,7 +33,6 @@ export default function ArchiveArticle() {
   const items = testArticlePosts.wpgraphql.test_article_posts.nodes
 
   return (
-    <Layout>
       <div className="posts-article">
         <div className="container">
           {items.map(item => {
@@ -55,6 +54,5 @@ export default function ArchiveArticle() {
           })}
         </div>
       </div>
-    </Layout>
   )
 }
