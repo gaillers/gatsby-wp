@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { Link, graphql } from "gatsby"
 import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
@@ -17,6 +17,11 @@ export const query = graphql`
             name
           }
         }
+        seo {
+          metaDesc
+          title
+          opengraphType
+        }
       }
     }
   }
@@ -28,7 +33,21 @@ const HomeTemplate = ({ data }) => {
   return (
     <>
       <Layout>
-       <Article/>
+        <Helmet 
+        htmlAttributes={{ lang: "en", amp: undefined }}
+        title={seo.title}
+        meta={
+          [
+            { name: "description", content: seo.metaDesc },
+            { property: "og.type", content: seo.opengraphType },
+            { property: "og.title", content: seo.title}
+          ]
+        }
+        
+        />
+          
+          <Article />
+      
       </Layout>
     </>
   )
