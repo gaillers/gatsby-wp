@@ -15,6 +15,15 @@ export default function Header(props) {
               id
               label
               url
+              parentId
+              childItems {
+                nodes {
+                  url
+                  label
+                  id
+                  parentId
+                }
+              }
             }
           }
         }
@@ -50,36 +59,42 @@ export default function Header(props) {
             <img src={mediaItemUrl} alt={altText} />
           </Link>
         </div>
-          <nav className="nav">
-            <ul className="nav__item">
-              {items.map(item => (
+        <nav className="nav">
+          <ul className="nav__item">
+            {items.map(item => {
+              if (item.parentId !== null) {
+                return
+              }
+
+              return (
                 <li
                   key={item.id}
                   className={`nav__link ${title === item.label ? "link" : ""}`}
                 >
-                  <Link to={item.url}>
-                    {item.label}
-                  </Link>
+                  <Link to={item.url}>{item.label}</Link>
 
-                  {/* <ul className="dropdown">
-                        {dropdowns.map(dropdown => (
-                          <li
-                            key={dropdown.id}
-                            className={`menu-item ${
-                              title === dropdown.label ? "current-menu-item" : ""
-                            }`}
-                          >
-                            <Link key={dropdown.url} to={dropdown.url}>
-                              {dropdown.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul> */}
+                  {item.childItems.nodes.length > 0 && (
+                    <ul className="dropdown">
+                      {item.childItems.nodes.map(dropdown => (
+                        <li
+                          key={dropdown.id}
+                          className={`menu-item ${
+                            title === dropdown.label ? "current-menu-item" : ""
+                          }`}
+                        >
+                          <Link key={dropdown.url} to={dropdown.url}>
+                            {dropdown.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+              )
+            })}
+          </ul>
+        </nav>
+      </div>
     </header>
   )
 }
