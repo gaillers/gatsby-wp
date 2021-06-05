@@ -1,8 +1,9 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { Helmet } from "react-helmet"
 import Layout from "../components/Layout"
-import Article from "../templates/archives/ArchiveArticle"
+import TestForm from "../components/TestForm"
+// import GravityForm from "../hooks/gravityforms"
 
 export const query = graphql`
   query($id: ID!) {
@@ -26,7 +27,7 @@ export const query = graphql`
     }
   }
 `
-const HomeTemplate = ({ data }) => {
+const ContactUsTemplate = ({ data }) => {
   const page = data.wpgraphql.page
   const seo = page.seo
 
@@ -43,17 +44,13 @@ const HomeTemplate = ({ data }) => {
             { property: "og.title", content: seo.title}
           ]
         }
-        
         />
           
-        <Article />
-
-        <Link style={{padding: '20px', display: 'inline-block'}} to="/contact-us/">Contact Us | Test Form</Link>
-      
+       <TestForm />
+       {/* <GravityForm/> */}
       </Layout>
-      
     </>
   )
 }
 
-export default HomeTemplate
+export default ContactUsTemplate
